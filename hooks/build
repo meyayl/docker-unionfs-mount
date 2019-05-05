@@ -1,5 +1,5 @@
 #!/bin/bash -xe
-. ./hooks/env
+. ./hooks/pre_build
 
 docker build \ 
   --no-cache \
