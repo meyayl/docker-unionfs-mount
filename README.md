@@ -81,4 +81,3 @@ If you expose your unionfs folder as a remote share:
 
 ## Docker Swarm
 Since the container needs to be run in privliged mode, this image can not be used on Docker Swarm. Sadly, Docker Swarm lacks support for priviliged containers. 
-It is based on alpine linux. For shell access while the container is running, `docker exec -it unionfs-mount /bin/bash`.
