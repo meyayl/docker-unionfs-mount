@@ -17,15 +17,15 @@ echo "Environment variables:
 "
 
 if [[ "$DOCKER_TAG" =~ ^[0-9.]+$ ]]; then
-    DOCKER_NEWTAG="latest"
-else
-    echo "ERROR: Invalid docker tag."
-    exit 1
-fi
 
-echo "Adding tag '$DOCKER_NEWTAG' to image..."
-docker tag $IMAGE_NAME ${DOCKER_REPO}:$DOCKER_NEWTAG
-echo "Pushing image..."
-docker push ${DOCKER_REPO}:$DOCKER_NEWTAG
+    DOCKER_NEWTAG="latest"
+    echo "Adding tag '$DOCKER_NEWTAG' to image..."
+    docker tag $IMAGE_NAME ${DOCKER_REPO}:$DOCKER_NEWTAG
+    echo "Pushing image..."
+    docker push ${DOCKER_REPO}:$DOCKER_NEWTAG
+
+else
+  echo "Nothing to do."
+fi
 
 echo "post_push hook terminated successfully."
