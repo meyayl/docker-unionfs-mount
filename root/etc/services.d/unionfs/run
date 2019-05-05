@@ -1,0 +1,16 @@
+#!/usr/bin/with-contenv sh
+
+echo "$( date +'%Y/%m/%d %H:%M:%S' ) Mounting /read-only + /read-write as ${MOUNT_PATH}"
+
+exec /usr/bin/unionfs \
+  -o allow_other `# allow access to other users` \
+  -o auto_cache `# enable caching based on modification times` \
+  -o auto_unmount `# auto unmount on process termination` \
+  -o cow `# enable copy-on-write` \
+  -o direct_io `# use direct I/O` \
+  -o gid=$PGID `# set file group` \
+  -o sync_read `# perform reads synchronously` \
+  -o uid=$PUID `# set file owner` \
+  -f `# foreground process` \
+  /read-write=RW:/read-only=RO \
+  ${MOUNT_PATH}
