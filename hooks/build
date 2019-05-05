@@ -1,5 +1,7 @@
-#!/bin/bash -xe
-. ./hooks/pre_build
+#!/bin/bash
+echo "build hook started."
+set -e
+source ./hooks/pre_build
 
 docker build \ 
   --no-cache \
@@ -7,3 +9,5 @@ docker build \
   --build-arg VERSION=${VERSION} \
   --tag=$IMAGE_NAME \
   .
+echo "build hook terminated successfully."
+
