@@ -58,11 +58,11 @@ The volume parameters are split into two halves, separated by a colon, the left 
 | /read-write |  The read write mount point.|
 | /unionfs  |  The unionfs mount. Needs to match the MOUNT_PATH. |
 
-The examples form above assume that /read-only and /read-write exist localy in your filesystem.
+The examples form above assume that `/read-only` and `/read-writ`e exist localy in your filesystem.
 
-If the host path for the /read-only bind is a mounted remote share, you might want to switch the propagation from `ro` to `shared`.
+If the host path for the `/read-only` bind is a mounted remote share, you might want to switch the propagation from `ro` to `shared`.
 
-If the host path for the /read-write bind is a mounted remote share, you might want to switch the propagation from 'rw' to 'shared'
+If the host path for the `/read-write` bind is a mounted remote share, you might want to switch the propagation from `rw` to `shared`.
 
 See for further details: https://docs.docker.com/storage/bind-mounts/#configure-bind-propagation
 
