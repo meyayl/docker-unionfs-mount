@@ -25,7 +25,7 @@ docker run -d \
 version: '2.2'
 services:
   unionfs:
-    image:  meyay/unionfs-mount:1.0.0
+    image: meyay/unionfs-mount:1.0.0
     container_name: unionfs-mount
     privileged: true
     volumes:
