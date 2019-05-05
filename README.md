@@ -1,3 +1,4 @@
+[![](https://images.microbadger.com/badges/image/meyay/unionfs-mount.svg)](https://microbadger.com/images/meyay/unionfs-mount "Get your own image badge on microbadger.com")[![](https://images.microbadger.com/badges/version/meyay/unionfs-mount.svg)](https://microbadger.com/images/meyay/unionfs-mount "Get your own version badge on microbadger.com")
 # unionfs-mount
 
 Create a unionfs mount, merging the content of a read only source, and a read/write source folder.
