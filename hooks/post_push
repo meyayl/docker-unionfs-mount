@@ -14,7 +14,6 @@ echo "Environment variables:
     DOCKER_REPO=$DOCKER_REPO
     DOCKER_TAG=$DOCKER_TAG
     SOURCE_BRANCH=$SOURCE_BRANCH
-    IMAGE_VERSION=$IMAGE_VERSION
 "
 
 if [[ "$DOCKER_TAG" =~ ^[0-9.]+$ ]]; then
