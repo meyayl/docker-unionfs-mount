@@ -3,7 +3,7 @@ echo "build hook started."
 set -e
 source ./hooks/pre_build
 
-docker build \ 
+docker build \
   --no-cache \
   --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
   --build-arg VERSION=${VERSION} \
