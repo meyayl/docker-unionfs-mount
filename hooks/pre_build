@@ -27,4 +27,7 @@ echo "Environment variables:
   DOCKERFILE_PATH=$DOCKERFILE_PATH
 "
 
+# changing tag in the Dockerhub description
+sed -E "s#meyay/unionfs-mount:[0-9.]+#meyay/unionfs-mount:$VERSION#g" README.md
+
 echo "pre_build hook terminated successfully."
