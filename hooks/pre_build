@@ -1,0 +1,21 @@
+#!/bin/bash -e
+echo "pre_build hook started."
+[ -n "$SOURCE_BRANCH" ]  || SOURCE_BRANCH=$(git symbolic-ref -q --short HEAD)
+ 
+if [[ "${SOURCE_BRANCH/-*/}" =~ ^[0-9.]+*$ ]]; then 
+	VERSION=${SOURCE_BRANCH/-*/}
+fi
+ 
+[ -n "$IMAGE_NAME" ] || IMAGE_NAME=meyay/unionfs-mount:${SOURCE_BRANCH}
+
+echo "Environment variables:
+  IMAGE_NAME=$IMAGE_NAME
+  DOCKER_REPO=$DOCKER_REPO
+  DOCKER_TAG=$DOCKER_TAG
+  SOURCE_BRANCH=$SOURCE_BRANCH
+  VERSION=$VERSION
+  DOCKERFILE_PATH=$DOCKERFILE_PATH
+  IMAGE_VERSION=$IMAGE_VERSION
+"
+
+echo "pre_build hook terminated successfully."

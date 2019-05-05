@@ -1,0 +1,9 @@
+#!/bin/bash -xe
+. ./hooks/env
+
+docker build \ 
+  --no-cache \
+  --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+  --build-arg VERSION=${VERSION} \
+  --tag=$IMAGE_NAME \
+  .
