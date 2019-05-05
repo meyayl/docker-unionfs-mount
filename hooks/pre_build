@@ -1,18 +1,23 @@
 #!/bin/bash -e
 echo "pre_build hook started."
-[ -n "$SOURCE_BRANCH" ]  || SOURCE_BRANCH=$(git symbolic-ref -q --short HEAD)
- 
 
+# Set TAG from SOURCE-BRANCH varible
+[ -n "$SOURCE_BRANCH" ]  || SOURCE_BRANCH=$(git symbolic-ref -q --short HEAD)
 if [[ "${SOURCE_BRANCH}" =~ "master" ]]; then 
 	VERSION=latest
 elif [[ "${SOURCE_BRANCH/-*/}" =~ ^[0-9.]+*$ ]]; then
     VERSION=${SOURCE_BRANCH/-*/}
-
-
 fi
- 
-[ -n "$IMAGE_NAME" ] || IMAGE_NAME=meyay/unionfs-mount:${SOURCE_BRANCH}
+# Set BUILD_DATE
+BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") 
 
+# SET VCS_REF aka commit id
+VCS_REF=$(git rev-parse --short HEAD)
+
+# Set IMAGE_NAME
+[ -n "$IMAGE_NAME" ] || IMAGE_NAME=meyay/unionfs-mount:${VERSION}
+
+# Print available variables
 echo "Environment variables:
   IMAGE_NAME=$IMAGE_NAME
   DOCKER_REPO=$DOCKER_REPO

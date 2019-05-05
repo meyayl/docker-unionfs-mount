@@ -1,13 +1,13 @@
 #!/bin/bash
 echo "build hook started."
-set -e
 source ./hooks/pre_build
+set -eu
 
-docker build \
-  --no-cache \
-  --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
-  --build-arg VERSION=${VERSION} \
-  --tag=$IMAGE_NAME \
-  .
+docker build --no-cache \
+             --build-arg BUILD_DATE=${BUILD_DATE} \
+             --build-arg VCS_REF=${VCS_REF} \
+             --build-arg VERSION=${VERSION} \
+             --tag=$IMAGE_NAME .
+
 echo "build hook terminated successfully."
 
