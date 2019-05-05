@@ -20,7 +20,6 @@ echo "Environment variables:
   SOURCE_BRANCH=$SOURCE_BRANCH
   VERSION=$VERSION
   DOCKERFILE_PATH=$DOCKERFILE_PATH
-  IMAGE_VERSION=$IMAGE_VERSION
 "
 
 echo "pre_build hook terminated successfully."
