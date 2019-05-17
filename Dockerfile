@@ -12,8 +12,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"
 
-ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 TZ="Europe/Berlin" PUID=1000 PGID=1000 MOUNT_PATH=/unionfs
-
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 TZ="Europe/Berlin" PUID=1000 PGID=1000 READ_ONLY_DIR=/read-only READ_WRITE_DIR=/read-write MERGED_DIR=/merged REMEMBER=30 READ_SYNC=true COW=true AUTO_CACHE=true USE_INO=true
+# AUTO_CACHE AUTO_UNMOUNT NONEMPTY COW DIRECT_IO READ_ASYNC HARD_REMOVE USE_INO READDIR_INO ENTRY_TIMEOUT NEGATIVE_TIMEOUT ATTR_TIMEOUT AC_ATTR_TIMEOUT REMEMBER
 RUN \
   echo "**** install s6-overlay ****" && \
   apk add --no-cache curl && \
@@ -21,7 +21,7 @@ RUN \
   apk del --no-cache curl && \
   echo "**** install runtime packages ****" && \
   apk add --no-cache \
-    ca-certificates \
+    bash \
     tzdata \
     unionfs-fuse && \
   echo "**** configure fuse ****" && \
@@ -30,5 +30,5 @@ RUN \
   rm -rf /tmp/*
 
 COPY root/ /
-VOLUME ["/read-only", "/read-write", "/unionfs"]
+VOLUME ["/read-only", "/read-write", "/merged"]
 CMD ["/init"]

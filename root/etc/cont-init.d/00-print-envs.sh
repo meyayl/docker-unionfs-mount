@@ -6,3 +6,4 @@ PUID=${PUID}\\n\
 PGID=${PGID}\\n\
 TZ=${TZ}\\n\
 MOUNT_PATH=${MOUNT_PATH}"
+echo $(env)

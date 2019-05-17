@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv sh
-echo "$( date +'%Y/%m/%d %H:%M:%S' ) Unmounting $MOUNT_PATH"
-fusermount -uz $MOUNT_PATH
+echo "$( date +'%Y/%m/%d %H:%M:%S' ) Unmounting ${MERGED_DIR}"
+fusermount -uz ${MERGED_DIR}
 if [[ $? -eq 0 ]]; then
   echo "$( date +'%Y/%m/%d %H:%M:%S' ) INFO: Successfully unmounted."
 else

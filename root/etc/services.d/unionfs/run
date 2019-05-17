@@ -1,16 +1,40 @@
-#!/usr/bin/with-contenv sh
+#!/usr/bin/with-contenv bash
+echo "$( date +'%Y/%m/%d %H:%M:%S' ) Mounting ${READ_ONLY_DIR} + ${READ_WRITE_DIR} in ${MERGED_DIR}"
 
-echo "$( date +'%Y/%m/%d %H:%M:%S' ) Mounting /read-only + /read-write as ${MOUNT_PATH}"
+params=""
+for key in AUTO_CACHE AUTO_UNMOUNT NONEMPTY COW DIRECT_IO ASYNC_READ HARD_REMOVE USE_INO READDIR_INO ATOMIC_O_TRUNC BIG_WRITES; do
+  value="${!key}"
+  if [ -n "${value}" ];then
+    if [ "$key" == "ASYNC_READ" ];then
+      if [ "${value}_" == "true_" ];then
+         params="$params -o ${key,,}"
+      else
+         params="$params -o sync_read"
+      fi
+    else
+      if [ "_${value}" == "_true" ];then
+        params="$params -o ${key,,}"
+      fi
+    fi
+  fi
+done
 
-exec /usr/bin/unionfs \
-  -o allow_other `# allow access to other users` \
-  -o auto_cache `# enable caching based on modification times` \
-  -o auto_unmount `# auto unmount on process termination` \
-  -o cow `# enable copy-on-write` \
-  -o direct_io `# use direct I/O` \
-  -o gid=$PGID `# set file group` \
-  -o sync_read `# perform reads synchronously` \
-  -o uid=$PUID `# set file owner` \
-  -f `# foreground process` \
-  /read-write=RW:/read-only=RO \
-  ${MOUNT_PATH}
+for key in ENTRY_TIMEOUT NEGATIVE_TIMEOUT ATTR_TIMEOUT AC_ATTR_TIMEOUT REMEMBER;do
+  value="${!key}"
+  if [ -n "${value}" ];then
+    params="$params -o ${key,,}=$value"
+  fi
+done
+
+_cmd="/usr/bin/unionfs \
+  -f $params \
+  -o allow_other \
+  -o auto_unmount \
+  -o uid=${PUID} \
+  -o gid=${PGID} \
+  ${READ_WRITE_DIR}=RW:${READ_ONLY_DIR}=RO \
+  ${MERGED_DIR}"
+
+echo "${_cmd}"	
+
+exec $(echo ${_cmd}) 
