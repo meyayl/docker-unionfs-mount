@@ -18,7 +18,7 @@ docker run -d \
  --volume $PWD/archive:/read-only:ro\
  --volume $PWD/current:/read-write:rw\
  --volume $PWD/unionfs:/unionfs:shared \
-  meyay/unionfs-mount:1.0.0
+  meyay/unionfs-mount:1.0.2
 ```
 
 ## Docker Compose Usage 
@@ -26,7 +26,7 @@ docker run -d \
 version: '2.2'
 services:
   unionfs:
-    image: meyay/unionfs-mount:1.0.0
+    image: meyay/unionfs-mount:1.0.2
     container_name: unionfs-mount
     privileged: true
     volumes:
@@ -41,7 +41,7 @@ services:
 ```
 
 ## Parameters
-The environment parameters are split into two halves, separated by an equal, the left hand side representing the host and the right the container side.
+The environment parameters are split into two halves, separated by an equal, the left hand side representing the variable name the right its value.
 
 | ENV| DEFAULT | DESCRIPTION |
 | ------ | ------ | ------ |
